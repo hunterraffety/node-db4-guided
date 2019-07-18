@@ -11,7 +11,7 @@ server.use(express.json());
 server.get('/api/species', async (req, res) => {
   // get all species from the database
   try {
-    const species = await db('species'); 
+    const species = await db('species');
     res.status(200).json(species);
   } catch (error) {
     res.status(500).json(error);
@@ -22,8 +22,11 @@ server.get('/api/animals', async (req, res) => {
   // get all animals from the database
   try {
     // include species name
-    const animals = await db('animals')
-    .leftJoin('species', 'species.id', 'species_id'); 
+    const animals = await db('animals').leftJoin(
+      'species',
+      'species.id',
+      'species_id'
+    );
 
     res.status(200).json(animals);
   } catch (error) {
